@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+</head>
+<body>
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{#    {% csrf_token %}#}
+    {% for choice in question.choice_set.all %}
+        {# forloop.counter是DJango模板系统管理专门提供的一个变量，用来表示你当前循环的次数       #}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+    {% endfor %}
+<input type="submit" value="vote" />
+</form>
+</body>
+</html>

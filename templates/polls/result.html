@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+</head>
+<body>
+<h1>{{ question.question_text }}</h1>
+<ul>
+    {% for choice in question.choice_set.all %}
+    {# forloop.counter是DJango模板系统管理专门提供的一个变量，用来表示你当前循环的次数       #}
+        <li>{{ choice.choice_text }} -- {{ choice.votes }} vote {{ choice.votes|pluralize }}</li><br />
+    {% endfor %}
+</ul>
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+</body>
+</html>
